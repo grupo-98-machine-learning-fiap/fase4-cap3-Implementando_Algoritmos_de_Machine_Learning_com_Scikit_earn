@@ -77,6 +77,22 @@ KNN e SVM ganharam +1,6 p.p. de accuracy; o Random Forest já estava no melhor p
 
 As features mais discriminativas são **área** e **perímetro**, responsáveis por ~44% da importância total.
 
+## Interpretação por modelo
+
+**Random Forest (melhor — 92,1%).** Captura interações não-lineares e é robusto à forte redundância entre features (área↔perímetro, r ≈ 0,99), pois cada árvore amostra um subconjunto aleatório de atributos (`max_features='sqrt'`). A otimização não trouxe ganho: o baseline já estava perto do limite separável do dataset — sinal de estabilidade, não de subajuste.
+
+**SVM (87,3% → 88,9%).** O GridSearch preferiu **kernel linear** ao RBF padrão, indicando que, após a padronização, as três variedades são quase **linearmente separáveis**. O `C=100` (margem rígida) confirma baixa sobreposição entre classes. É a fronteira de decisão mais simples e com menor gap entre validação cruzada e teste.
+
+**KNN (87,3% → 88,9%).** Mais sensível à escala e à redundância das features — depende criticamente da padronização. O ótimo com `metric='manhattan'` e `n_neighbors=3` mostra que vizinhanças pequenas e locais descrevem melhor os grupos. É o modelo mais simples, porém o menos escalável (custo de inferência cresce com o nº de amostras).
+
+**Padrão comum de erro.** Em todos os modelos a variedade **Kama** concentra os erros (menor recall), confundida com Canadian/Rosa, enquanto **Rosa** e **Canadian** são quase perfeitamente separadas — coerente com Kama ocupar uma faixa intermediária de tamanho (visível no pairplot e nos boxplots).
+
+### Insights para o contexto da cooperativa
+
+- **Medir bem o tamanho/forma do grão** (área, perímetro, comprimento do sulco) é mais determinante que medidas finas como compacidade ou assimetria.
+- **Risco operacional** concentra-se em lotes da variedade **Kama** (a intermediária), que merecem revisão; lotes Rosa/Canadian podem ser classificados com altíssima confiança.
+- **Escolha do modelo:** o **Random Forest** é a recomendação — maior acurácia, dispensa padronização e fornece a importância das features (interpretável para o agrônomo). KNN e SVM são alternativas mais leves, porém ligeiramente menos precisas.
+
 ## Conclusão
 
 **Qual modelo performou melhor?**
