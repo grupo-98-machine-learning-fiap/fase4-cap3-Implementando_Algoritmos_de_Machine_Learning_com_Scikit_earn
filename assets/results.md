@@ -46,16 +46,22 @@ As features com maior correlação entre si são **area** e **perimetro** (r ≈
 ## Melhor Modelo
 **Random Forest** com accuracy de 92,06% e F1 macro de 91,92% no conjunto de teste.
 
-## Otimização do SVM (GridSearchCV)
+## Otimização dos Modelos (GridSearchCV, 5-fold)
 
-| Fase | Accuracy | F1 (macro) |
-|---|---|---|
-| SVM padrão | 0.8730 | 0.8713 |
-| SVM otimizado | 0.8889 | 0.8875 |
+Todos os três modelos foram otimizados via `GridSearchCV`:
 
-- **Melhores hiperparâmetros:** `C=100, kernel='linear'`
-- **Melhor score CV (5-fold):** 0.9731
-- Ganho de +1,6 p.p. em accuracy com a otimização.
+| Modelo | Accuracy (baseline) | Accuracy (otimizado) | F1 macro (otimizado) | Ganho Acc |
+|---|---|---|---|---|
+| KNN | 0.8730 | 0.8889 | 0.8881 | +0.0159 |
+| SVM | 0.8730 | 0.8889 | 0.8875 | +0.0159 |
+| Random Forest | 0.9206 | 0.9206 | 0.9192 | 0.0000 |
+
+**Melhores hiperparâmetros:**
+- **KNN:** `n_neighbors=3, weights='uniform', metric='manhattan'` (CV = 0.9460)
+- **SVM:** `C=100, kernel='linear', gamma='scale'` (CV = 0.9731)
+- **Random Forest:** `n_estimators=300, max_depth=None, max_features='sqrt', min_samples_split=2` (CV = 0.9055)
+
+KNN e SVM ganharam +1,6 p.p. de accuracy; o Random Forest já estava no melhor patamar e a otimização confirmou a robustez dos hiperparâmetros padrão.
 
 ## Feature Importance (Random Forest)
 
@@ -74,7 +80,7 @@ As features mais discriminativas são **área** e **perímetro**, responsáveis 
 ## Conclusão
 
 **Qual modelo performou melhor?**
-O **Random Forest** obteve a maior accuracy (92,06%) e F1 macro (91,92%), superando KNN e SVM tanto no baseline quanto após otimização do SVM.
+O **Random Forest** obteve a maior accuracy (92,06%) e F1 macro (91,92%), superando KNN e SVM tanto no baseline quanto após a otimização de todos os modelos.
 
 **Qual teve maior generalização (menor gap treino/teste)?**
 O **SVM com kernel linear** (após otimização) apresentou maior estabilidade, com pouca diferença entre score CV e score no teste. O Random Forest também generalizou bem, sem sinais de overfitting significativos.

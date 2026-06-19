@@ -126,7 +126,7 @@ project/
 │   ├── visualization.py            # Geração de gráficos exploratórios
 │   ├── train_models.py             # Treinamento de KNN, SVM e Random Forest
 │   ├── evaluate.py                 # Métricas e tabela comparativa
-│   ├── optimize.py                 # Otimização do SVM com GridSearchCV
+│   ├── optimize.py                 # Otimização de KNN, SVM e RF com GridSearchCV
 │   └── utils.py                    # Feature importance
 ├── reports/
 │   ├── figures/                    # Gráficos salvos automaticamente
@@ -180,12 +180,13 @@ Para cada modelo no conjunto de teste:
 - Accuracy, Precision, Recall, F1-score (macro e weighted)
 - Matriz de confusão e relatório de classificação por classe
 
-### 9. Otimização do SVM (`src/optimize.py`)
-`GridSearchCV` com validação cruzada de 5 folds:
-- `C` ∈ [0.1, 1, 10, 100]
-- `kernel` ∈ ['linear', 'rbf']
+### 9. Otimização dos Modelos (`src/optimize.py`)
+`GridSearchCV` com validação cruzada de 5 folds para **os três modelos**, com reavaliação completa (accuracy, precisão, recall, F1 e matriz de confusão):
+- **KNN:** `n_neighbors`, `weights`, `metric` → melhor: `n_neighbors=3, weights=uniform, metric=manhattan`
+- **SVM:** `C`, `kernel`, `gamma` → melhor: `C=100, kernel=linear, gamma=scale`
+- **Random Forest:** `n_estimators`, `max_depth`, `min_samples_split`, `max_features` → melhor: `n_estimators=300, max_depth=None, max_features=sqrt, min_samples_split=2`
 
-Melhores parâmetros encontrados: **C=100, kernel=linear** (+1,6 p.p. de accuracy).
+KNN e SVM ganharam +1,6 p.p. de accuracy; o Random Forest manteve seu desempenho de baseline (já era o melhor).
 
 ### 10. Feature Importance (`src/utils.py`)
 Importância das features extraída do Random Forest, ordenada de forma decrescente. As features `area` e `perimetro` respondem por ~44% da importância total.
@@ -196,10 +197,11 @@ Importância das features extraída do Random Forest, ordenada de forma decresce
 
 | Modelo | Accuracy | Precision (macro) | Recall (macro) | F1 (macro) |
 |---|---|---|---|---|
-| KNN | 87,3% | 87,2% | 87,3% | 87,1% |
+| KNN (padrão) | 87,3% | 87,2% | 87,3% | 87,1% |
+| KNN (otimizado) | 88,9% | 88,8% | 88,9% | 88,8% |
 | SVM (padrão) | 87,3% | 87,2% | 87,3% | 87,1% |
+| SVM (otimizado) | 88,9% | 89,1% | 88,9% | 88,8% |
 | **Random Forest** | **92,1%** | **92,4%** | **92,1%** | **91,9%** |
-| SVM (otimizado) | 88,9% | — | — | 88,8% |
 
 **Melhor modelo:** Random Forest com **92,1% de accuracy**.
 
