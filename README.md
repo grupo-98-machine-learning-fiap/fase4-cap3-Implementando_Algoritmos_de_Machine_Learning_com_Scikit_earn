@@ -11,11 +11,11 @@
 ## Nome do grupo
 
 ## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 5</a>
+- <a href="https://www.linkedin.com/in/eduardo-venancio/">Eduardo Venancio Leite</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Francisco José Bittencourt Corrêa</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Jullyana de Azevedo Rodrigues</a> 
+- <a href="https://www.linkedin.com/in/kaiquecadimiel/">Kaique Cadimiel Amasio de Souza</a> 
+- <a href="https://www.linkedin.com/in/lucas-paiva-02ab522a9/">Lucas Paiva de Oliveira</a>
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
