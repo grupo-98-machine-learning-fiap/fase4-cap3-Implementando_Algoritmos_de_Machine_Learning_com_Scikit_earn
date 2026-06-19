@@ -6,7 +6,7 @@
 
 <br>
 
-# Nome do projeto
+# Classificação de Grãos de Trigo — Seeds Dataset
 
 ## 98
 
@@ -26,7 +26,11 @@
 
 ## 📜 Descrição
 
-*Descreva seu projeto com base no texto do PBL (até 600 palavras)*
+Este projeto implementa um pipeline completo de Machine Learning seguindo a metodologia **CRISP-DM** para classificar automaticamente 3 variedades de trigo (**Kama**, **Rosa** e **Canadian**) com base em 7 características físicas dos grãos, utilizando o Seeds Dataset da UCI.
+
+O problema é tratado como uma **classificação multiclasse supervisionada**. Foram treinados e comparados três algoritmos — **KNN**, **SVM** e **Random Forest** — com otimização de hiperparâmetros via `GridSearchCV`. O **Random Forest** obteve o melhor desempenho com **92,1% de accuracy**.
+
+A solução é viável para cooperativas agrícolas de pequeno porte: as 7 medidas físicas dos grãos são obtidas por equipamentos simples de análise de sementes, o treinamento ocorre em menos de 1 segundo em hardware convencional, e a interpretabilidade via feature importance permite que agrônomos entendam o processo de classificação. As features mais discriminativas são **área** e **perímetro**, responsáveis por ~44% da importância total no modelo Random Forest.
 
 
 ## 📁 Estrutura de pastas
@@ -49,21 +53,38 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 ## 🔧 Como executar o código
 
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços, bibliotecas etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o seu código e executá-lo a partir de sua máquina ou seu repositório. Considere a explicação organizada em fase.*
+**Pré-requisitos:** Python 3.10 ou superior.
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/grupo-98-machine-learning-fiap/fase4-cap3-Implementando_Algoritmos_de_Machine_Learning_com_Scikit_earn.git
+cd fase4-cap3-Implementando_Algoritmos_de_Machine_Learning_com_Scikit_earn
+
+# 2. Instale as dependências
+pip install -r requirements.txt
+
+# 3. Abra o notebook principal
+jupyter notebook notebooks/seeds_classification.ipynb
+```
+
+No notebook, execute **Kernel → Restart & Run All** para rodar todas as etapas sequencialmente (carregamento, EDA, pré-processamento, treinamento, avaliação e otimização).
 
 
 ## 🗃 Histórico de lançamentos
 
-* 0.5.0 - XX/XX/2024
-    * 
-* 0.4.0 - XX/XX/2024
-    * 
-* 0.3.0 - XX/XX/2024
-    * 
-* 0.2.0 - XX/XX/2024
-    * 
-* 0.1.0 - XX/XX/2024
-    *
+* 0.5.0 - 19/06/2026
+    * Aprofundamento da interpretação dos resultados por modelo (Tarefa 4)
+    * Relatório completo em `reports/results.md`
+* 0.4.0 - 19/06/2026
+    * Otimização de KNN, SVM e Random Forest com GridSearchCV (5-fold CV)
+    * Avaliação completa com accuracy, F1 e matriz de confusão por modelo otimizado
+* 0.3.0 - 19/06/2026
+    * Atualização da documentação e estrutura do README
+* 0.2.0 - 19/06/2026
+    * Pipeline completo: carregamento, EDA, pré-processamento, treinamento e avaliação
+    * Visualizações exploratórias (histogramas, boxplots, correlação, pairplot, feature importance)
+* 0.1.0 - 19/06/2026
+    * Criação da estrutura do projeto e automação para classificação de grãos
 
 ## 📋 Licença
 
